@@ -1,0 +1,47 @@
+const mongoose = require('mongoose');
+
+
+const Schema = mongoose.Schema;
+//Created a user database schema showing types of data to take into db as well as whether or not its required
+const WorkoutSchema = new Schema(
+    {
+        workout_name: {
+            type: String,
+            required: true
+        },
+        user_id:{
+            type:String,
+            required: true
+        },
+        exercises: 
+        [
+            {
+                exercise: {
+                    type: String,
+                    required: true
+                },
+                sets: {
+                    type: Number,
+                    required: true
+                },
+                reps: {
+                    type: Number,
+                    required: true
+                },
+                weight: {
+                    type: Number,
+                    required: true
+                }
+            }
+        ],
+
+    },
+    {
+        collection:'workouts'
+    },
+    {
+        timestamp:true
+    }
+);
+
+module.exports = mongoose.model('WorkoutSchema', WorkoutSchema)
