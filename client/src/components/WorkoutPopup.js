@@ -12,10 +12,10 @@ export default function WorkoutPopup(props) {
             <h3>{workout.workout_name}</h3>
             {workout.exercises.map((exercise, index) =>(
                 <div className = "exercise-info" key = {index}>
-                    <div className = "popup-label" >Exercise: {exercise.exercise}</div>
-                    <div className = "popup-label">Sets: {exercise.sets}</div>
-                    <div className = "popup-label">Reps: {exercise.reps}</div>
-                    <div className = "popup-label">Weight: {exercise.weight}</div>
+                    <div className = "popup-label" ><strong>Exercise</strong>: {exercise.exercise}</div>
+                    <div className = "popup-label"><strong>Sets</strong>: {exercise.sets}</div>
+                    <div className = "popup-label"><strong>Reps</strong>: {exercise.reps}</div>
+                    <div className = "popup-label"><strong>Weight</strong>: {exercise.weight} lbs</div>
                     <hr></hr>
                 </div>
             ))}
