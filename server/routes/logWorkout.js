@@ -8,26 +8,22 @@ require('dotenv')
 const router = express.Router();
 const date = new Date();
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-
-const fullDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`; 
 
 router.post('/', async(req,res) => {
-    const {token, workouts } = req.body;
+    const {token, workouts, workout_name } = req.body;
     // const user = await User.findOne(username)
     console.log(token)
     console.log(workouts)
+    console.log(workout_name)
     console.log("success")
     user_id = jwt.decode(token).id;
 
     if(!workouts){
         return res.status(400).json({status: 'error', error:"Invalid workout, please fill out all fields."})
     }
-    
 
     const response = await Workout.create({
-        "workout_name" : fullDate,
+        "workout_name" : workout_name,
         "user_id": user_id,
         "exercises": workouts
     })

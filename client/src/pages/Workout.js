@@ -5,8 +5,16 @@ import Navbar from '../components/Navbar'
 
 export default function Workout() {
 
+  const date = new Date();
+
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const fullDate = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`; 
+
+
+
   const token = localStorage.getItem('token')
 
+  const [workoutDate, setWorkoutDate] = React.useState(fullDate);
 
   const [workouts, setWorkouts] = React.useState([{
     exercise:'',
@@ -33,7 +41,7 @@ export default function Workout() {
     const response = await fetch('/api/logworkout', {
       method: 'POST',
       headers:{ 'Content-Type': 'application/json' },
-      body: JSON.stringify({token: token, workouts:workouts})
+      body: JSON.stringify({token: token, workouts:workouts, workout_name: workoutDate})
     })
     console.log(response)
     const json = await response.json();
@@ -64,7 +72,18 @@ export default function Workout() {
       <Navbar />
       <div className = "workout-form container">
         <form className = "add-workout-form" onSubmit = {handleSubmit}>
+        <div className = "workout-date-container">
           <h1>Add a Workout</h1>
+          <div>Workout Date: </div>
+          <input
+            name = "workout-date"
+            className = "input-container"
+            id = "workout-date-input"
+            type = "text"
+            value = {workoutDate}
+            onChange = { (e) => setWorkoutDate(e.target.value)}
+          />
+          </div>
           {workouts.map( (workout, index) => (
             <div className = "workouts" key = {index}>
               <div className = "workout-line">
@@ -114,3 +133,4 @@ export default function Workout() {
     </div>
   )
 }
+

@@ -11,8 +11,23 @@ body{
     flex-direction: column;
 }
 
-.workout-page h1{
+.workout-date-container
+{
+    justify-content:center;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    font-size:1.75em;
+    padding-bottom: 30px;
+}
+.workout-date-container h1{
     margin:40px 0px;
+    font-weight:bold;
+    padding-right:55px;
+}
+
+#workout-date-input{
+    width:250px;
 }
 .workouts{
     display:flex;
@@ -42,3 +57,4 @@ body{
 .delete-button{
     margin-left:50px;
 }
+
