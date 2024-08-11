@@ -29,24 +29,31 @@ export default function Progress()
 
 
 
-    return(
-        <div className = "progress-page">
-        <Navbar />
-        <h1>History</h1>
+    return (
+        <div className="progress-page">
+            <Navbar />
+            <h1>History</h1>
 
-        {workouts.map( (workout, index) => (
-            <div className = "workouts" key = {index}>
-                <div className = "workout-line">
-                <div className = "workout-title">{workout.workout_name}</div>
-                <button className = "more-info" onClick = {() => setButtonPopup(true)}>Arrow Icon</button>
-                <Popup trigger = {buttonPopup} workout = {workout} setTrigger = {setButtonPopup}>
-
-                </Popup>
-                <hr></hr>
+            {workouts.map((workout, index) => (
+                <div className="workouts" key={index}>
+                    <div className="workout-line">
+                        <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
+                        {/* <button
+                            // key={`button-${index}`}
+                            className="more-info"
+                            onClick={() => setButtonPopup(index)}
+                        >
+                            Arrow Icon
+                        </button> */}
+                        <Popup
+                            trigger={buttonPopup === index}
+                            workout={workout}
+                            setTrigger={setButtonPopup}
+                        ></Popup>
+                        <hr/>
+                    </div>
                 </div>
-
-            </div>
-        ))}
+            ))}
         </div>
-    )
+    );
 }

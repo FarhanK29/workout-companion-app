@@ -3,14 +3,22 @@ import './WorkoutPopup.css'
 
 export default function WorkoutPopup(props) {
     const workout = props.workout;
-    console.log(workout)
 
     return (props.trigger) ? (
         <div className = "popup">
             <div className = "popup-inner">
                 <button className = "close-btn" onClick = {() => {props.setTrigger(false)}}>x</button>
                 { props.children }
-            <div>{workout.workout_name}</div>
+            <h3>{workout.workout_name}</h3>
+            {workout.exercises.map((exercise, index) =>(
+                <div className = "exercise-info" key = {index}>
+                    <div className = "popup-label" >Exercise: {exercise.exercise}</div>
+                    <div className = "popup-label">Sets: {exercise.sets}</div>
+                    <div className = "popup-label">Reps: {exercise.reps}</div>
+                    <div className = "popup-label">Weight: {exercise.weight}</div>
+                    <hr></hr>
+                </div>
+            ))}
             </div>
         </div>
     ) : "";
