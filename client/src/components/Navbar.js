@@ -19,7 +19,7 @@ export default function Navbar() {
                  */}
                 <Link to = "/workout" className = "link-button">Log a Workout</Link>
                 <Link to = "/progress" className = "link-button">Progress</Link>
-                <span onClick = {handleLogout} className = "link-button">Logout</span>
+                <span onClick = {handleLogout} className = "link-button" id = "logout-btn">Logout</span>
             </div>
     </nav>
   )

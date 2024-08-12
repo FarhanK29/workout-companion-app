@@ -2,6 +2,10 @@ import React from 'react'
 import './Workout.css'
 import Navbar from '../components/Navbar'
 
+//icons
+import { FaTrash } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
+
 
 export default function Workout() {
 
@@ -121,12 +125,12 @@ export default function Workout() {
                   onChange = {(e) => handleChangeInput(index, e)}
                 />
                 <label>lbs</label>
-                <button className = "delete-button" onClick = {() => deleteWorkout(index)}>Delete</button>
+                <FaTrash className = "delete-button" onClick = {() => deleteWorkout(index)}/>
               </div>
               <hr></hr>
             </div>
           ))}
-          <button className = "add-button" onClick = {(event) => addField(event)} >Add Field</button>
+          <IoMdAdd className = "add-button" onClick = {(event) => addField(event)} />
           <button className = "submit-button" type = "submit" onClick = {(event) => handleSubmit(event)}>Submit</button>
             </form>
       </div>
