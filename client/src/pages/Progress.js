@@ -10,7 +10,7 @@ export default function Progress()
 {
     const [buttonPopup, setButtonPopup] = React.useState(false);
 
-    const [workouts, setWorkouts] = React.useState([{workout_title:"Hello"},{workout_title:"Hello2"}, {workout_title:"hello3"}]);
+    const [workouts, setWorkouts] = React.useState([]);
 
     React.useEffect(() =>{
         const token = localStorage.getItem('token')

@@ -20,4 +20,6 @@
 
 .link-button:hover{
     cursor:pointer;
+    color:rgb(0, 153, 255);
 }
+#logout-btn:hover{color:red;}
