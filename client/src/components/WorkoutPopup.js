@@ -1,13 +1,17 @@
 import React from 'react'
 import './WorkoutPopup.css'
 
+//icons
+import { IoIosCloseCircleOutline } from "react-icons/io";
+
+
 export default function WorkoutPopup(props) {
     const workout = props.workout;
 
     return (props.trigger) ? (
         <div className = "popup">
             <div className = "popup-inner">
-                <button className = "close-btn" onClick = {() => {props.setTrigger(false)}}>x</button>
+                <IoIosCloseCircleOutline color = "red" size = "35px" className = "close-btn"onClick = {() => {props.setTrigger(false)}} />
                 { props.children }
             <h3>{workout.workout_name}</h3>
             {workout.exercises.map((exercise, index) =>(
@@ -16,7 +20,6 @@ export default function WorkoutPopup(props) {
                     <div className = "popup-label"><strong>Sets</strong>: {exercise.sets}</div>
                     <div className = "popup-label"><strong>Reps</strong>: {exercise.reps}</div>
                     <div className = "popup-label"><strong>Weight</strong>: {exercise.weight} lbs</div>
-                    <div className = "delete-workout">Delete</div>
                     <hr></hr>
                 </div>
             ))}
