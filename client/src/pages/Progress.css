@@ -1,4 +1,4 @@
-.progress-page{
+.progress-background{
     position: absolute;
     top: 0;
     left: 0;
@@ -10,6 +10,21 @@
     flex-direction: column;
 }
 
-.workout-line > hr{
-    position: relative;
+.progress-page{
+    padding:15px;
+    padding-top:25px;
+}
+
+.progress-page > h1 {
+    font-size:3em;
+    padding-bottom:30px;
+}
+
+.workout-title{
+    font-size:1.6em;
+    text-decoration: underline;
+}
+.workout-title:hover{
+    cursor:pointer;
+
 }

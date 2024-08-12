@@ -31,3 +31,10 @@
     flex-direction:row;
     gap:20px;
 }
+
+.close-btn{
+    border-radius:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}

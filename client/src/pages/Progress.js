@@ -30,30 +30,32 @@ export default function Progress()
 
 
     return (
-        <div className="progress-page">
+        <div className="progress-background">
             <Navbar />
-            <h1>History</h1>
+            <div className = "progress-page">
+                <h1>History</h1>
 
-            {workouts.map((workout, index) => (
-                <div className="workouts" key={index}>
-                    <div className="workout-line">
-                        <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
-                        {/* <button
-                            // key={`button-${index}`}
-                            className="more-info"
-                            onClick={() => setButtonPopup(index)}
-                        >
-                            Arrow Icon
-                        </button> */}
-                        <Popup
-                            trigger={buttonPopup === index}
-                            workout={workout}
-                            setTrigger={setButtonPopup}
-                        ></Popup>
-                        <hr/>
+                {workouts.map((workout, index) => (
+                    <div className="workouts" key={index}>
+                        <div className="workout-line">
+                            <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
+                            {/* <button
+                                // key={`button-${index}`}
+                                className="more-info"
+                                onClick={() => setButtonPopup(index)}
+                            >
+                                Arrow Icon
+                            </button> */}
+                            <Popup
+                                trigger={buttonPopup === index}
+                                workout={workout}
+                                setTrigger={setButtonPopup}
+                            ></Popup>
+                            <hr/>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }
