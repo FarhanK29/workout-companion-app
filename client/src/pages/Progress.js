@@ -27,7 +27,7 @@ export default function Progress()
     }, [])
 
 
-
+    console.log(workouts[0])
 
     return (
         <div className="progress-background">
@@ -39,13 +39,6 @@ export default function Progress()
                     <div className="workouts" key={index}>
                         <div className="workout-line">
                             <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
-                            {/* <button
-                                // key={`button-${index}`}
-                                className="more-info"
-                                onClick={() => setButtonPopup(index)}
-                            >
-                                Arrow Icon
-                            </button> */}
                             <Popup
                                 trigger={buttonPopup === index}
                                 workout={workout}

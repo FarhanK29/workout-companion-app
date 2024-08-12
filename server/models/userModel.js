@@ -19,11 +19,10 @@ const UserSchema = new Schema(
     },
     {
         //names the collection users rather than default
-        collection: 'users'
-    },
-    {
+        collection: 'users',
+        
         //gives a timestamp of when item was added to db
-        timestamps:true
+        timestamps: true
     }
 );
 

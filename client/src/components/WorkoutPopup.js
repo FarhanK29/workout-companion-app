@@ -16,6 +16,7 @@ export default function WorkoutPopup(props) {
                     <div className = "popup-label"><strong>Sets</strong>: {exercise.sets}</div>
                     <div className = "popup-label"><strong>Reps</strong>: {exercise.reps}</div>
                     <div className = "popup-label"><strong>Weight</strong>: {exercise.weight} lbs</div>
+                    <div className = "delete-workout">Delete</div>
                     <hr></hr>
                 </div>
             ))}

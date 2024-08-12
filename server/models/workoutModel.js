@@ -37,11 +37,10 @@ const WorkoutSchema = new Schema(
 
     },
     {
-        collection:'workouts'
+        collection:'workouts',
+        timestamps:true
     },
-    {
-        timestamp:true
-    }
+
 );
 
 module.exports = mongoose.model('WorkoutSchema', WorkoutSchema)
