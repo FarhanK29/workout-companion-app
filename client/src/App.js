@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route  } from 'react-router-dom';
-import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Workout from './pages/Workout'
 import Progress from './pages/Progress'
+
 
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound'
@@ -12,14 +12,14 @@ import NotFound from './pages/NotFound'
 
 const App = () =>{
     return(
+    
         <BrowserRouter>
         <Routes>
             <Route path = "/login" element = {<Login />} />
             <Route path = "/register" element = {<Register />} />
 
             <Route element = {<ProtectedRoute />} >
-                <Route path = "/" element = {<Home />} />
-                <Route path = "/workout" element = {<Workout />} />
+                <Route path = "/" element = {<Workout />} />
                 <Route path = "/progress" element = {<Progress />} />
             </Route>
             <Route path="*" element={<NotFound />} />

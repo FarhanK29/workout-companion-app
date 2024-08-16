@@ -6,6 +6,8 @@ import Popup from '../components/WorkoutPopup'
 
 
 
+
+
 export default function Progress() 
 {
     const [buttonPopup, setButtonPopup] = React.useState(false);
@@ -30,25 +32,26 @@ export default function Progress()
     console.log(workouts[0])
 
     return (
-        <div className="progress-background">
-            <Navbar />
-            <div className = "progress-page">
-                <h1>History</h1>
 
-                {workouts.map((workout, index) => (
-                    <div className="workouts" key={index}>
-                        <div className="workout-line">
-                            <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
-                            <Popup
-                                trigger={buttonPopup === index}
-                                workout={workout}
-                                setTrigger={setButtonPopup}
-                            ></Popup>
-                            <hr/>
+            <div className="progress-background">
+                <Navbar />
+                <div className = "progress-page">
+                    <h1>History</h1>
+
+                    {workouts.map((workout, index) => (
+                        <div className="workouts" key={index}>
+                            <div className="workout-line">
+                                <div className="workout-title" onClick={() => setButtonPopup(index)} >{workout.workout_name}</div>
+                                <Popup
+                                    trigger={buttonPopup === index}
+                                    workout={workout}
+                                    setTrigger={setButtonPopup}
+                                ></Popup>
+                                <hr/>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
     );
 }

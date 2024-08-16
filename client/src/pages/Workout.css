@@ -2,6 +2,11 @@ body{
     padding:0;
     margin:0;
 }
+html, body{
+    background-color:#232323;
+    box-sizing:border-box;
+    overflow-x:hidden;
+}
 .workout-page{
     background:#232323;
     height:100%;

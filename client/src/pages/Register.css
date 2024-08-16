@@ -49,7 +49,7 @@ body{
 .workout-header{
     font-size: 1.6em;
     padding:15px;
-    padding-left:30px;
+    padding-left:22px;
     display:inline-block;
     color:white;
 
@@ -92,6 +92,7 @@ body{
     width:255px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom:12px;
 }
     
 
@@ -112,38 +113,3 @@ body{
 }
 
 
-
-/* Modal CSS */
-.modal {
-    font-size: 12px;
-  }
-  .modal > .header {
-    width: 100%;
-    border-bottom: 1px solid gray;
-    font-size: 18px;
-    text-align: center;
-    padding: 5px;
-  }
-  .modal > .content {
-    width: 100%;
-    padding: 10px 5px;
-  }
-  .modal > .actions {
-    width: 100%;
-    padding: 10px 5px;
-    margin: auto;
-    text-align: center;
-  }
-  .modal > .close {
-    cursor: pointer;
-    position: absolute;
-    display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: #ffffff;
-    border-radius: 18px;
-    border: 1px solid #cfcece;
-  }
