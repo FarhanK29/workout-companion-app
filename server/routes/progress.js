@@ -9,6 +9,8 @@ const router = express.Router();
 router.get('/', async(req,res) =>{
     const token = req.headers.authorization;
     user_id = jwt.decode(token).id;
+    const date = req.headers.date;
+    console.log(date)
 
     if(!token){
         return res.status(400).json({status:'error', error:'User is not logged in'})

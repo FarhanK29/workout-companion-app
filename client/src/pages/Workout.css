@@ -3,12 +3,11 @@ body{
     margin:0;
 }
 html, body{
-    background-color:#232323;
+    background-color:#302424;
     box-sizing:border-box;
     overflow-x:hidden;
 }
 .workout-page{
-    background:#232323;
     height:100%;
     width:100%;
     color:white;

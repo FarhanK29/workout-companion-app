@@ -4,6 +4,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Workout from './pages/Workout'
 import Progress from './pages/Progress'
+import Home from './pages/Home'
 
 
 import ProtectedRoute from './components/ProtectedRoute';
@@ -19,7 +20,7 @@ const App = () =>{
             <Route path = "/register" element = {<Register />} />
 
             <Route element = {<ProtectedRoute />} >
-                <Route path = "/" element = {<Workout />} />
+                <Route path = "/" element = {<Home />} />
                 <Route path = "/progress" element = {<Progress />} />
             </Route>
             <Route path="*" element={<NotFound />} />

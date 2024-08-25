@@ -7,7 +7,8 @@ const WorkoutSchema = new Schema(
     {
         workout_name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         user_id:{
             type:String,
