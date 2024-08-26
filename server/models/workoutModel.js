@@ -21,18 +21,23 @@ const WorkoutSchema = new Schema(
                     type: String,
                     required: true
                 },
-                sets: {
+                setAmount: {
                     type: Number,
                     required: true
                 },
-                reps: {
-                    type: Number,
-                    required: true
-                },
-                weight: {
-                    type: Number,
-                    required: true
-                }
+                sets:
+                [
+                    {
+                        reps: {
+                            type: Number,
+                            required: true
+                        },
+                        weight: {
+                            type: Number,
+                            required: true
+                        }
+                    }
+                ]
             }
         ],
 

@@ -24,70 +24,83 @@ export default function Home() {
 
     const token = localStorage.getItem('token')
 
-    React.useEffect(() =>{
-        const token = localStorage.getItem('token')
-        const fetchData = async() => {
-            const response = await fetch('api/progress/' + date,{
-                method:'GET',
-                headers: {'Authorization': token,'Content-Type': 'application/json' },
+    // React.useEffect(() =>{
+    //     const token = localStorage.getItem('token')
+    //     const fetchData = async() => {
+    //         const response = await fetch('api/progress/' + date,{
+    //             method:'GET',
+    //             headers: {'Authorization': token,'Content-Type': 'application/json' },
 
-            })
-            const json = await response.json();
-            setWorkouts(json);
-        };
-        fetchData();
-    }, [])
+    //         })
+    //         const json = await response.json();
+    //         setWorkouts(json);
+    //     };
+    //     fetchData();
+    // }, [])
 
     const [workouts, setWorkouts] = React.useState([{
         exercise:'',
-        sets: '',
-        reps:'',
-        weight: ''
+        sets: [],
     }])
 
-    const handleChangeInput = (index, event) => {
+
+
+    const handleChangeName = (index, event) => {
         const values = [...workouts];
         values[index][event.target.name] = event.target.value;
         setWorkouts(values);
     }
+    const handleChangeInput = (index, setIndex, event) =>{
+        const values = [...workouts];
+        values[index].sets[setIndex][event.target.name] = event.target.value;
+        setWorkouts(values)
+    }
 
     const addField = (event) => {
         event.preventDefault();
-        setWorkouts([...workouts, {exercise:'', sets: '', reps: '', weight: ''}])
+        setWorkouts([...workouts, {exercise:'', sets:[]}])
     }
 
     const handleSubmit = async(event) => {
         event.preventDefault();
         console.log(workouts);
         //Submit the workout to the database
-        const response = await fetch('/api/logworkout', {
-        method: 'POST',
-        headers:{ 'Content-Type': 'application/json' },
-        body: JSON.stringify({token: token, workouts:workouts, workout_date: date})
-        })
-        console.log(response)
-        const json = await response.json();
-        if(!response.ok){
-        console.log(json.error);
-        }
-        else{
-        alert("Workout Successfully Submitted!")
-        setWorkouts([{
-            exercise:'',
-            sets: '',
-            reps:'',
-            weight: ''
-        }])
-        }
+        // const response = await fetch('/api/logworkout', {
+        // method: 'POST',
+        // headers:{ 'Content-Type': 'application/json' },
+        // body: JSON.stringify({token: token, workouts:workouts, workout_date: date})
+        // })
+        // console.log(response)
+        // const json = await response.json();
+        // if(!response.ok){
+        // console.log(json.error);
+        // }
+        // else{
+        // alert("Workout Successfully Submitted!")
+        // setWorkouts([{
+        //     exercise:'',
+        //     sets: [],
+        // }])
+        // }
         
 
     }
 
     const deleteWorkout = (index) =>{
+
         const values = [...workouts];
         values.splice(index, 1);
         setWorkouts(values);
     }
+
+    const addSet = (index) =>{
+        console.log(workouts[index].sets.length)
+        const values = [...workouts]
+        values[index].sets.push([{reps:'', weight:''}])
+        setWorkouts(values)
+        console.log(workouts[index].sets.length)
+    }
+    
 
 
     return (
@@ -109,11 +122,11 @@ export default function Home() {
 
                 }}
             />
-
-
             </div>
+
             {workouts.map( (workout, index) => (
                 <div className = "workouts" key = {index}>
+
                 <div className = "workout-line">
                     <label>Exercise Name:</label>
                     <input 
@@ -123,33 +136,33 @@ export default function Home() {
                     type = "text"  
 
                     value = {workout.exercise}
-                    onChange = {(e) => handleChangeInput(index, e)} 
+                    onChange = {(e) => handleChangeName(index, e)} 
                     />
-                    <label>Sets:</label>
-                    <input className = "input-container" 
-                    name = "sets"
-                    type = "number" 
-                    value = {workout.sets}
-                    onChange = {(e) => handleChangeInput(index, e)}
-                    />
-                    <label>Reps:</label>
-                    <input 
-                    name = "reps"
-                    className = "input-container"
-                    type = "number" 
-                    value = {workout.reps}
-                    onChange = {(e) => handleChangeInput(index, e)}
-                    />
-                    <label>Weight:</label>
-                    <input
-                    name = "weight"
-                    className = "input-container"
-                    type = "number"  
-                    value = {workout.weight} 
-                    onChange = {(e) => handleChangeInput(index, e)}
-                    />
-                    <label>lbs</label>
                     <FaTrash className = "delete-button" onClick = {() => deleteWorkout(index)}/>
+                    <button className = "add-set" onClick = {() => addSet(index)}>Add Set</button>
+                    {workouts[index].sets.map((set, setIndex) => (
+                        <div className = "sets" key = {setIndex}>
+                            <div className = "set-title">Set {setIndex+1}</div>
+                            <label>Reps:</label>
+                            <input 
+                            name = "reps"
+                            className = "input-container"
+                            type = "text" 
+                            value = {set.reps}
+                            onChange = {(e) => handleChangeInput(index, setIndex, e)}
+                            />
+                            <label>Weight:</label>
+                            <input
+                            name = "weight"
+                            className = "input-container"
+                            type = "text"  
+                            value = {set.weight} 
+                            onChange = {(e) => handleChangeInput(index, setIndex, e)}
+                            />
+                            <label>lbs</label>
+                        </div>
+                        
+                    ))}
                 </div>
                 <hr></hr>
                 </div>
