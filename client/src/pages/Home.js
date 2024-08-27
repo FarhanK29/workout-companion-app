@@ -11,6 +11,8 @@ import dayjs from 'dayjs'
 //icons
 import { FaTrash } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
+import { MdOutlineClose } from "react-icons/md";
+
 
 
 export default function Home() {
@@ -94,11 +96,15 @@ export default function Home() {
     }
 
     const addSet = (index) =>{
-        console.log(workouts[index].sets.length)
         const values = [...workouts]
         values[index].sets.push([{reps:'', weight:''}])
         setWorkouts(values)
-        console.log(workouts[index].sets.length)
+    }
+
+    const deleteSet = (index, setIndex) => {
+        const values = [...workouts]
+        values[index].sets.splice(setIndex,1);
+        setWorkouts(values)
     }
     
 
@@ -160,6 +166,7 @@ export default function Home() {
                             onChange = {(e) => handleChangeInput(index, setIndex, e)}
                             />
                             <label>lbs</label>
+                            <MdOutlineClose className = "delete-set" onClick = {(e) => deleteSet(index, setIndex)}/>
                         </div>
                         
                     ))}
