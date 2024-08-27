@@ -8,6 +8,7 @@ const User = require('./models/userModel')
 const auth = require('./routes/auth');
 const logWorkout = require('./routes/logWorkout')
 const progress = require('./routes/progress')
+
 //to run server: nodemon server.js 
 
 
@@ -34,6 +35,7 @@ app.use('/api/register', register)
 app.use('/api/login', login)
 app.use('/api/auth', auth)
 app.use('/api/progress', progress)
+app.use('/api/workout', workoutRoutes)
 
 
 

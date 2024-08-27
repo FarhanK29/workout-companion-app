@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 //Created a user database schema showing types of data to take into db as well as whether or not its required
 const WorkoutSchema = new Schema(
     {
-        workout_name: {
+        workout_date: {
             type: String,
             required: true,
             unique: true
@@ -21,19 +21,15 @@ const WorkoutSchema = new Schema(
                     type: String,
                     required: true
                 },
-                setAmount: {
-                    type: Number,
-                    required: true
-                },
                 sets:
                 [
                     {
                         reps: {
-                            type: Number,
+                            type: String,
                             required: true
                         },
                         weight: {
-                            type: Number,
+                            type: String,
                             required: true
                         }
                     }

@@ -17,26 +17,27 @@ import { MdOutlineClose } from "react-icons/md";
 
 export default function Home() {
 
-    //Date Picker
-    let currentDate = Date();
-    
-    const [date, setDate] = React.useState(dayjs(currentDate))
-    // console.log(date)
+    let currentDate = dayjs()
+    const [date, setDate] = React.useState(currentDate)
+    console.log(date)
+    console.log(date.get('year'))
+    console.log(date.get('month'))
+    console.log(date.get('date'))
 
 
     const token = localStorage.getItem('token')
 
     React.useEffect(() =>{
+        const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
         const token = localStorage.getItem('token')
         const fetchData = async() => {
-            const response = await fetch('api/progress/' + date,{
+            const response = await fetch('api/workout/'+formattedDate, {
                 method:'GET',
                 headers: {'Authorization': token,'Content-Type': 'application/json' },
             })
             console.log(response)
             const json = await response.json();
-            console.log(json)
-            setWorkouts(json);
+            setWorkouts(json[0].exercises);
         };
         fetchData();
     }, [])
@@ -66,12 +67,15 @@ export default function Home() {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-        console.log(workouts)
+        // console.log(workouts)
+
         //Submit the workout to the database
+        const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
+        console.log(formattedDate)
         const response = await fetch('/api/logworkout', {
         method: 'POST',
         headers:{ 'Content-Type': 'application/json' },
-        body: JSON.stringify({token: token, workouts:workouts, workout_date: date})
+        body: JSON.stringify({token: token, workouts:workouts, workout_date: formattedDate})
         })
         console.log(response)
         const json = await response.json();
