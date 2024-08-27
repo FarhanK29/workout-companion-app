@@ -10,20 +10,19 @@ const date = new Date();
 
 
 router.post('/', async(req,res) => {
-    const {token, workouts, workout_name } = req.body;
+    const {token, workouts, workout_date } = req.body;
     // const user = await User.findOne(username)
     console.log(token)
     console.log(workouts)
-    console.log(workout_name)
-    console.log("success")
+    console.log(workout_date)
     user_id = jwt.decode(token).id;
 
     if(!workouts){
         return res.status(400).json({status: 'error', error:"Invalid workout, please fill out all fields."})
     }
-
+    
     const response = await Workout.create({
-        "workout_name" : workout_name,
+        "workout_date" : workout_date,
         "user_id": user_id,
         "exercises": workouts
     })

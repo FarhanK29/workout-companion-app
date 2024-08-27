@@ -21,24 +21,25 @@ export default function Home() {
     let currentDate = Date();
     
     const [date, setDate] = React.useState(dayjs(currentDate))
-    console.log(date)
+    // console.log(date)
 
 
     const token = localStorage.getItem('token')
 
-    // React.useEffect(() =>{
-    //     const token = localStorage.getItem('token')
-    //     const fetchData = async() => {
-    //         const response = await fetch('api/progress/' + date,{
-    //             method:'GET',
-    //             headers: {'Authorization': token,'Content-Type': 'application/json' },
-
-    //         })
-    //         const json = await response.json();
-    //         setWorkouts(json);
-    //     };
-    //     fetchData();
-    // }, [])
+    React.useEffect(() =>{
+        const token = localStorage.getItem('token')
+        const fetchData = async() => {
+            const response = await fetch('api/progress/' + date,{
+                method:'GET',
+                headers: {'Authorization': token,'Content-Type': 'application/json' },
+            })
+            console.log(response)
+            const json = await response.json();
+            console.log(json)
+            setWorkouts(json);
+        };
+        fetchData();
+    }, [])
 
     const [workouts, setWorkouts] = React.useState([{
         exercise:'',
@@ -65,25 +66,25 @@ export default function Home() {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-        console.log(workouts);
+        console.log(workouts)
         //Submit the workout to the database
-        // const response = await fetch('/api/logworkout', {
-        // method: 'POST',
-        // headers:{ 'Content-Type': 'application/json' },
-        // body: JSON.stringify({token: token, workouts:workouts, workout_date: date})
-        // })
-        // console.log(response)
-        // const json = await response.json();
-        // if(!response.ok){
-        // console.log(json.error);
-        // }
-        // else{
-        // alert("Workout Successfully Submitted!")
-        // setWorkouts([{
-        //     exercise:'',
-        //     sets: [],
-        // }])
-        // }
+        const response = await fetch('/api/logworkout', {
+        method: 'POST',
+        headers:{ 'Content-Type': 'application/json' },
+        body: JSON.stringify({token: token, workouts:workouts, workout_date: date})
+        })
+        console.log(response)
+        const json = await response.json();
+        if(!response.ok){
+        console.log(json.error);
+        }
+        else{
+        alert("Workout Successfully Submitted!")
+        setWorkouts([{
+            exercise:'',
+            sets: [],
+        }])
+        }
         
 
     }
@@ -95,9 +96,10 @@ export default function Home() {
         setWorkouts(values);
     }
 
-    const addSet = (index) =>{
+    const addSet = (e, index) =>{
+        e.preventDefault();
         const values = [...workouts]
-        values[index].sets.push([{reps:'', weight:''}])
+        values[index].sets.push({reps:'', weight:''})
         setWorkouts(values)
     }
 
@@ -145,7 +147,6 @@ export default function Home() {
                     onChange = {(e) => handleChangeName(index, e)} 
                     />
                     <FaTrash className = "delete-button" onClick = {() => deleteWorkout(index)}/>
-                    <button className = "add-set" onClick = {() => addSet(index)}>Add Set</button>
                     {workouts[index].sets.map((set, setIndex) => (
                         <div className = "sets" key = {setIndex}>
                             <div className = "set-title">Set {setIndex+1}</div>
@@ -170,12 +171,13 @@ export default function Home() {
                         </div>
                         
                     ))}
+                <button className = "add-set" onClick = {(e) => addSet(e,index)}>Add Set</button>
                 </div>
                 <hr></hr>
                 </div>
             ))}
             <IoMdAdd className = "add-button" onClick = {(event) => addField(event)} />
-            <button className = "submit-button" type = "submit" onClick = {(event) => handleSubmit(event)}>Save</button>
+            <button className = "submit-button" type = "submit">Save</button>
                 </form>
         </div>
         </div>
