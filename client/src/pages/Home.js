@@ -19,15 +19,17 @@ export default function Home() {
 
     let currentDate = dayjs()
     const [date, setDate] = React.useState(currentDate)
-    console.log(date)
-    console.log(date.get('year'))
-    console.log(date.get('month'))
-    console.log(date.get('date'))
+    // console.log(date)
+    // console.log(date.get('year'))
+    // console.log(date.get('month'))
+    // console.log(date.get('date'))
 
+    const [exists, setExists] = React.useState(false)
 
     const token = localStorage.getItem('token')
 
     React.useEffect(() =>{
+        console.log(date)
         const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
         const token = localStorage.getItem('token')
         const fetchData = async() => {
@@ -35,17 +37,49 @@ export default function Home() {
                 method:'GET',
                 headers: {'Authorization': token,'Content-Type': 'application/json' },
             })
+
+            
             console.log(response)
-            const json = await response.json();
-            setWorkouts(json[0].exercises);
+            if(!response.ok){
+                setExists(true)
+            }
+            else{
+                setExists(false)
+                const json = await response.json();
+                setWorkouts(json[0].exercises);
+            }
         };
         fetchData();
-    }, [])
+    }, []);
 
     const [workouts, setWorkouts] = React.useState([{
         exercise:'',
         sets: [],
     }])
+
+    const handleChangeDate = (newDate) => {
+        
+        const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
+        const token = localStorage.getItem('token')
+        const fetchData = async() => {
+            const response = await fetch('api/workout/'+formattedDate, {
+                method:'GET',
+                headers: {'Authorization': token,'Content-Type': 'application/json' },
+            })
+
+            
+            console.log(response)
+            if(!response.ok){
+                setExists(true)
+            }
+            else{
+                setExists(false)
+                const json = await response.json();
+                setWorkouts(json[0].exercises);
+            }
+        };
+        fetchData();
+    }
 
 
 
@@ -72,22 +106,34 @@ export default function Home() {
         //Submit the workout to the database
         const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
         console.log(formattedDate)
-        const response = await fetch('/api/logworkout', {
-        method: 'POST',
-        headers:{ 'Content-Type': 'application/json' },
-        body: JSON.stringify({token: token, workouts:workouts, workout_date: formattedDate})
-        })
-        console.log(response)
-        const json = await response.json();
-        if(!response.ok){
-        console.log(json.error);
+        console.log(exists)
+        if(!exists){
+            const response = await fetch('/api/workout', {
+            method: 'POST',
+            headers:{ 'Content-Type': 'application/json' },
+            body: JSON.stringify({token: token, workouts:workouts, workout_date: formattedDate})
+            })
+            console.log(response)
+            const json = await response.json();
+            if(!response.ok){
+            console.log(json.error);
+            }
+            else{
+                alert("Workout Successfully Saved!")
+                setWorkouts([{
+                    exercise:'',
+                    sets: [],
+                }])
+            }
         }
         else{
-        alert("Workout Successfully Submitted!")
-        setWorkouts([{
-            exercise:'',
-            sets: [],
-        }])
+            const response = await fetch('/api/workout'+ formattedDate, {
+                method:'PATCH',
+                headers:{'Content-Type': 'application/json' },
+                body: JSON.stringify({token, token, workouts: workouts, workout_date: formattedDate})
+
+            })
+
         }
         
 
@@ -127,7 +173,7 @@ export default function Home() {
             <DatePicker
                 className = "datePicker"
                 value = {date}
-                onChange = {(newDate) => setDate(newDate)}
+
                 sx = {{
                     "& .MuiInputBase-input": {color:"white", fontSize:"1.5em"},
                     "& .MuiSvgIcon-root": {color:"white"},

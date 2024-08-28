@@ -67,7 +67,13 @@ router.get('/:date', async(req,res) =>{
         return res.status(400).json({status:'error', error:'User is not logged in'})
     }
     const response = await Workout.find({user_id: user_id, workout_date: date})
-    console.log(response);
+    console.log("response", response);
+
+    if(response.length == 0){
+        console.log("error")
+        return res.status(400).json({status: 'error', error:"Invalid username/password"})
+    }
+    console.log("no error")
     return res.json(response);
         
 })
