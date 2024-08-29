@@ -2,8 +2,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route  } from 'react-router-dom';
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Workout from './pages/Workout'
-import Progress from './pages/Progress'
 import Home from './pages/Home'
 
 
@@ -21,7 +19,6 @@ const App = () =>{
 
             <Route element = {<ProtectedRoute />} >
                 <Route path = "/" element = {<Home />} />
-                <Route path = "/progress" element = {<Progress />} />
             </Route>
             <Route path="*" element={<NotFound />} />
         </Routes>

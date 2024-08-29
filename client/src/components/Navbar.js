@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 export default function Navbar() {
@@ -15,10 +15,7 @@ export default function Navbar() {
     <nav className = "navbar-container">
             <Link to = "/" className = "link-button">Workout Companion</Link>
             <div className = "navbar-links-container">
-                {/* <div className = "navbar-username">{username}</div>
-                 */}
-                <Link to = "/workout" className = "link-button">Log a Workout</Link>
-                <Link to = "/progress" className = "link-button">Progress</Link>
+                <div>Welcome Back {username}</div>
                 <span onClick = {handleLogout} className = "link-button" id = "logout-btn">Logout</span>
             </div>
     </nav>

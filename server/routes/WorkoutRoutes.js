@@ -1,27 +1,3 @@
-// const express = require('express');
-
-// //Creates a router to redirect request to the appropriate function based off the path
-// const router = express.Router();
-
-// router.get('/:id', (req,res) => {
-//    res.json({msg: "GET SPECIFIC WORKOUT INFO HERE"})
-// })
-
-// router.post('/', (req,res) => {
-//     res.json({msg: "CREATE WORKOUT FUNCTION HERE"})
-// })
-
-// router.delete('/:id', (req,res) =>{
-//     res.json({msg: "DELETE WORKOUT FUNCTION HERE"})
-// })
-
-// router.patch('/:id',(req,res) => {
-//     res.json({msg: "UPDATE WORKOUT FUNCTION HERE"});
-// })
-
-// module.exports = router;
-
-
 
 const express = require('express');
 const User = require('../models/userModel') //imports user schema that we created
@@ -70,10 +46,8 @@ router.get('/:date', async(req,res) =>{
     console.log("response", response);
 
     if(response.length == 0){
-        console.log("error")
         return res.status(400).json({status: 'error', error:"Invalid username/password"})
     }
-    console.log("no error")
     return res.json(response);
         
 })

@@ -6,8 +6,8 @@ const register = require('./routes/register')
 const login = require('./routes/login')
 const User = require('./models/userModel')
 const auth = require('./routes/auth');
-const logWorkout = require('./routes/logWorkout')
-const progress = require('./routes/progress')
+
+
 
 //to run server: nodemon server.js 
 
@@ -30,11 +30,9 @@ app.use((req, res, next) => {
 
 //Any api call starting with "/api/workouts" will be redirected to the different routes in the routes folder
 
-app.use('/api/logworkout', logWorkout)
 app.use('/api/register', register)
 app.use('/api/login', login)
 app.use('/api/auth', auth)
-app.use('/api/progress', progress)
 app.use('/api/workout', workoutRoutes)
 
 
