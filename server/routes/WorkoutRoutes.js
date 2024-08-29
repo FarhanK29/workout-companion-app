@@ -78,4 +78,29 @@ router.get('/:date', async(req,res) =>{
         
 })
 
+
+
+router.put('/:id', async(req,res) => {
+    const {token, workouts, workout_date } = req.body;
+    const workoutId = req.params.id
+    console.log(token)
+    console.log(workouts)
+    user_id = jwt.decode(token).id;
+
+
+    if(!workouts){
+        return res.status(400).json({status: 'error', error:"Invalid workout, please fill out all fields."})
+    }
+    
+    const doc = await Workout.findOne({_id : workoutId})
+    doc.exercises = workouts
+    const response = await doc.save()
+    if(!response){
+        console.log("Could not save")
+        return res.status(400).json({status:'error', error:'Could not save workout to existing workout.'})
+    }
+    console.log("Response Saved")
+    res.status(200).json(response) 
+})
+
 module.exports = router;

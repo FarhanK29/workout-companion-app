@@ -24,12 +24,11 @@ export default function Home() {
     // console.log(date.get('month'))
     // console.log(date.get('date'))
 
-    const [exists, setExists] = React.useState(false)
+    const [docID, setDocID] = React.useState(-1)
 
     const token = localStorage.getItem('token')
 
     React.useEffect(() =>{
-        console.log(date)
         const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
         const token = localStorage.getItem('token')
         const fetchData = async() => {
@@ -38,48 +37,30 @@ export default function Home() {
                 headers: {'Authorization': token,'Content-Type': 'application/json' },
             })
 
-            
+            const json = await response.json();
             console.log(response)
             if(!response.ok){
-                setExists(true)
+                setDocID(-1)
+                setWorkouts([{
+                    exercise:'',
+                    sets: [],
+                }])
             }
             else{
-                setExists(false)
-                const json = await response.json();
+
+                setDocID(json[0]._id)
                 setWorkouts(json[0].exercises);
             }
         };
         fetchData();
-    }, []);
+    }, [date]);
 
     const [workouts, setWorkouts] = React.useState([{
         exercise:'',
         sets: [],
     }])
 
-    const handleChangeDate = (newDate) => {
-        
-        const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
-        const token = localStorage.getItem('token')
-        const fetchData = async() => {
-            const response = await fetch('api/workout/'+formattedDate, {
-                method:'GET',
-                headers: {'Authorization': token,'Content-Type': 'application/json' },
-            })
 
-            
-            console.log(response)
-            if(!response.ok){
-                setExists(true)
-            }
-            else{
-                setExists(false)
-                const json = await response.json();
-                setWorkouts(json[0].exercises);
-            }
-        };
-        fetchData();
-    }
 
 
 
@@ -101,42 +82,36 @@ export default function Home() {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-        // console.log(workouts)
 
         //Submit the workout to the database
         const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
-        console.log(formattedDate)
-        console.log(exists)
-        if(!exists){
-            const response = await fetch('/api/workout', {
+
+        
+        console.log(docID)
+        let response;
+        if(docID == -1){
+            response = await fetch('/api/workout', {
             method: 'POST',
             headers:{ 'Content-Type': 'application/json' },
             body: JSON.stringify({token: token, workouts:workouts, workout_date: formattedDate})
             })
-            console.log(response)
-            const json = await response.json();
-            if(!response.ok){
-            console.log(json.error);
-            }
-            else{
-                alert("Workout Successfully Saved!")
-                setWorkouts([{
-                    exercise:'',
-                    sets: [],
-                }])
-            }
         }
-        else{
-            const response = await fetch('/api/workout'+ formattedDate, {
-                method:'PATCH',
+        else
+        {
+            response = await fetch('/api/workout/'+ docID, {
+                method:'PUT',
                 headers:{'Content-Type': 'application/json' },
                 body: JSON.stringify({token, token, workouts: workouts, workout_date: formattedDate})
-
             })
-
         }
-        
-
+        console.log(response)
+        const json = await response.json();
+        if(!response.ok){
+        console.log(json.error);
+        }
+        else{
+            alert("Workout Successfully Saved!")
+        }
     }
 
     const deleteWorkout = (index) =>{
@@ -169,11 +144,10 @@ export default function Home() {
             <form className = "add-workout-form" onSubmit = {handleSubmit}>
             <div className = "workout-date-container">
             <h1>Your Workout For</h1>
-
             <DatePicker
                 className = "datePicker"
                 value = {date}
-
+                onChange = {(newDate) =>{setDate(newDate)}}
                 sx = {{
                     "& .MuiInputBase-input": {color:"white", fontSize:"1.5em"},
                     "& .MuiSvgIcon-root": {color:"white"},
