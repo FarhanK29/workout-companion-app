@@ -5,8 +5,6 @@ const bcrypt = require('bcryptjs')
 
 require('dotenv')
 
-// const JWT_SECRET = 'ASsaj56ih9u7w6HSU%IJawo%H(124EATtdszg^#H(*&YFS^&AG^&AWTH8h%*&HUWYOthqoiTH&*52guij'
-
 const router = express.Router();
 
 router.post('/', async(req,res) => {

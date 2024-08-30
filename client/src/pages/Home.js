@@ -149,7 +149,7 @@ export default function Home() {
                 value = {date}
                 onChange = {(newDate) =>{setDate(newDate)}}
                 sx = {{
-                    "& .MuiInputBase-input": {color:"white", fontSize:"1.5em"},
+                    "& .MuiInputBase-input": {color:"white", fontSize:"1.8em"},
                     "& .MuiSvgIcon-root": {color:"white"},
 
                 }}
@@ -162,6 +162,7 @@ export default function Home() {
                 <div className = "workout-line">
                     <label>Exercise Name:</label>
                     <input 
+                    autocomplete = "off"
                     name = "exercise"
                     className = "input-container" 
                     id = "exercise-input"
@@ -173,29 +174,33 @@ export default function Home() {
                     <FaTrash className = "delete-button" onClick = {() => deleteWorkout(index)}/>
                     {workouts[index].sets.map((set, setIndex) => (
                         <div className = "sets" key = {setIndex}>
-                            <div className = "set-title">Set {setIndex+1}</div>
-                            <label>Reps:</label>
-                            <input 
-                            name = "reps"
-                            className = "input-container"
-                            type = "text" 
-                            value = {set.reps}
-                            onChange = {(e) => handleChangeInput(index, setIndex, e)}
-                            />
-                            <label>Weight:</label>
-                            <input
-                            name = "weight"
-                            className = "input-container"
-                            type = "text"  
-                            value = {set.weight} 
-                            onChange = {(e) => handleChangeInput(index, setIndex, e)}
-                            />
-                            <label>lbs</label>
-                            <MdOutlineClose className = "delete-set" onClick = {(e) => deleteSet(index, setIndex)}/>
+                            <div className = "set-title"><strong>Set {setIndex+1}:</strong></div>
+                            <div className = "set-inputs">
+                                <label>Reps:</label>
+                                <input 
+                                autocomplete = "off"
+                                name = "reps"
+                                className = "input-container"
+                                type = "text" 
+                                value = {set.reps}
+                                onChange = {(e) => handleChangeInput(index, setIndex, e)}
+                                />
+                                <label>Weight:</label>
+                                <input
+                                autocomplete = "off"
+                                name = "weight"
+                                className = "input-container"
+                                type = "text"  
+                                value = {set.weight} 
+                                onChange = {(e) => handleChangeInput(index, setIndex, e)}
+                                />
+                                <label>lbs</label>
+                                <MdOutlineClose className = "delete-set" onClick = {(e) => deleteSet(index, setIndex)}/>
+                            </div>
                         </div>
                         
                     ))}
-                <button className = "add-set" onClick = {(e) => addSet(e,index)}>Add Set</button>
+                <button className = "add-set" onClick = {(e) => addSet(e,index)}>+ Add Set</button>
                 </div>
                 <hr></hr>
                 </div>
