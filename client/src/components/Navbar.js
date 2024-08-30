@@ -15,7 +15,7 @@ export default function Navbar() {
     <nav className = "navbar-container">
             <Link to = "/" className = "link-button">Workout Companion</Link>
             <div className = "navbar-links-container">
-                <div>Welcome Back {username}</div>
+                <div className = "navbar-welcome">Welcome Back {username}</div>
                 <span onClick = {handleLogout} className = "link-button" id = "logout-btn">Logout</span>
             </div>
     </nav>

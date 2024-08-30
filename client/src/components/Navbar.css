@@ -8,7 +8,11 @@
 }
 .navbar-links-container{
     display:flex;
-    gap:45px;
+    align-items:center;
+    gap:30px;
+}
+.navbar-welcome{
+    font-size:1.3em;
 }
 .link-button{
     color:white;
@@ -17,9 +21,14 @@
     font-weight: 500;
     transition: 0.3s;
 }
-
+.link-button{
+    color:rgb(2, 137, 255);
+    font-size:1.5em
+}
 .link-button:hover{
     cursor:pointer;
-    color:rgb(0, 153, 255);
 }
-#logout-btn:hover{color:red;}
+#logout-btn{
+    color:rgb(255, 0, 0);
+}
+#logout-btn:hover{color:rgb(188, 17, 17);}

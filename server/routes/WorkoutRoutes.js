@@ -46,7 +46,7 @@ router.get('/:date', async(req,res) =>{
     console.log("response", response);
 
     if(response.length == 0){
-        return res.status(400).json({status: 'error', error:"Invalid username/password"})
+        return res.status(200).json({status: 'error', error:"Workout not found"})
     }
     return res.json(response);
         

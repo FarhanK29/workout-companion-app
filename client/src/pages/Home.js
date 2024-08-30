@@ -39,7 +39,7 @@ export default function Home() {
 
             const json = await response.json();
             console.log(response)
-            if(!response.ok){
+            if(json.status == 'error'){
                 setDocID(-1)
                 setWorkouts([{
                     exercise:'',
