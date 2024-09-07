@@ -36,10 +36,11 @@ export default function Home() {
                 method:'GET',
                 headers: {'Authorization': token,'Content-Type': 'application/json' },
             })
+            
 
             const json = await response.json();
             console.log(response)
-            if(json.status == 'error'){
+            if(json.status === 'error'){
                 setDocID(-1)
                 setWorkouts([{
                     exercise:'',
@@ -85,11 +86,10 @@ export default function Home() {
 
         //Submit the workout to the database
         const formattedDate = `${date.get('year')}-${date.get('month')+1}-${date.get('date')}`
-
         
         console.log(docID)
         let response;
-        if(docID == -1){
+        if(docID === -1){
             response = await fetch('/api/workout', {
             method: 'POST',
             headers:{ 'Content-Type': 'application/json' },
@@ -101,7 +101,7 @@ export default function Home() {
             response = await fetch('/api/workout/'+ docID, {
                 method:'PUT',
                 headers:{'Content-Type': 'application/json' },
-                body: JSON.stringify({token, token, workouts: workouts, workout_date: formattedDate})
+                body: JSON.stringify({token: token, workouts: workouts, workout_date: formattedDate})
             })
         }
         console.log(response)
