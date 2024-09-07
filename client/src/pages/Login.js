@@ -14,6 +14,7 @@ const Login = () =>{
             headers:{ 'Content-Type': 'application/json' },
             body: JSON.stringify({username, password})
         })
+        console.log(response)
         const json = await response.json();
         if(!response.ok){
             setError(json.error)
