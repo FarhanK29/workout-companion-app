@@ -10,8 +10,7 @@ const auth = require('./routes/auth');
 
 
 //to run server: nodemon server.js 
-
-
+// test
 
 //create express app
 const app = express();
