@@ -6,7 +6,6 @@ const register = require('./routes/register')
 const login = require('./routes/login')
 const User = require('./models/userModel')
 const auth = require('./routes/auth');
-const path = require('path');
 
 
 
@@ -41,8 +40,7 @@ app.use('/api/workout', workoutRoutes)
 app.use(express.static('/client/build'))
 
 //Render client for any path
-app.get('*', (req,res) => res.sendFile(path.join(__dirname, '../client', '/dist/index.html')))
-// res.sendFile(path.join(__dirname, '../public', 'index1.html'));
+app.get('*', (req,res) => res.sendFile(__dirname, '/client/dist/index.html'))
 
 //connect to mongodb and listen for requests
 mongoose.connect(process.env.MONGO_URI)
