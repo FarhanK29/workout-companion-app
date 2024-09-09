@@ -6,11 +6,11 @@ const register = require('./routes/register')
 const login = require('./routes/login')
 const User = require('./models/userModel')
 const auth = require('./routes/auth');
+const path = require('path');
 
 
 
-//to run server: nodemon server.js 
-// test
+
 
 //create express app
 const app = express();
@@ -27,7 +27,8 @@ app.use((req, res, next) => {
 })
 
 
-console.log(__dirname)
+app.use(express.static(path.join(__dirname, "build")));
+
 //Any api call starting with "/api/workouts" will be redirected to the different routes in the routes folder
 
 app.use('/api/register', register)
