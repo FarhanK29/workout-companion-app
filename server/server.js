@@ -37,17 +37,17 @@ app.use('/api/auth', auth)
 app.use('/api/workout', workoutRoutes)
 
 //Use the client app
-app.use(express.static('/client/build'))
+// app.use(express.static('/client/build'))
 
 //Render client for any path
-app.get('*', (req,res) => res.sendFile(__dirname, '/client/dist/index.html'))
+// app.get('*', (req,res) => res.sendFile(__dirname, '/client/dist/index.html'))
 
 //connect to mongodb and listen for requests
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     //listen for requests
-    app.listen(process.env.PORT, () => {
-        console.log('connected to db and server started on port', process.env.PORT);
+    app.listen(process.env.PORT || 4000, () => {
+        console.log('connected to db and server started on port', process.env.PORT || 4000);
     });
 })
 .catch((error) => {console.log(error)});
