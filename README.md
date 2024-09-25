@@ -34,15 +34,15 @@ The Workout Companion App is a full-stack web application designed to help users
 
 ## Tech Stack
 
-**Client:** React.js, Material-UI, react-icons
+**Client**: React.js, Material-UI, react-icons
 
-**Server:** Node.js, Express.js
+**Server**: Node.js, Express.js
 
-**Database** MongoDB
+**Database**: MongoDB
 
-**Authentication** JWT (JSON Web Tokens) for user authenticatoin
+**Authentication**: JWT (JSON Web Tokens) for user authenticatoin
 
-**Hosting** Website is hosted using render with cron-job sending http requests every 14 minutes to avoid timeout. 
+**Hosting**: Website is hosted using render with cron-job pinging server every 10 minutes to avoid timeout. 
 
 
 ## Roadmap
