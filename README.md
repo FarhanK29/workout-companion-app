@@ -54,6 +54,6 @@ The Workout Companion App is a full-stack web application designed to help users
 - Add the ability to create and track specific workout routines
 
 
-##Demo
+## Demo
 
 Link to Website: https://workout-companion.onrender.com
